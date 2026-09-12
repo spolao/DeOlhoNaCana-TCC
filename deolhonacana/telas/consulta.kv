@@ -1,0 +1,110 @@
+#:kivy 2.3.1
+
+<BotaoFiltro@MDRectangleFlatIconButton>:
+    icon: "menu-down"
+    size_hint: 1, None
+    height: dp(44)
+    font_size: "13sp"
+    theme_text_color: "Custom"
+    text_color: app.theme_cls.opposite_bg_dark
+    line_color: app.theme_cls.divider_color
+
+<TelaConsulta>:
+    MDBoxLayout:
+        orientation: "vertical"
+        md_bg_color: app.theme_cls.bg_darkest
+
+        MDTopAppBar:
+            title: "Consultar e concluir ocorrências"
+            left_action_items: [["arrow-left", lambda x: root.voltar(), "Voltar"]]
+            right_action_items: [["filter-off-outline", lambda x: root.limpar_filtros(), "Limpar filtros"], ["refresh", lambda x: root.pesquisar(), "Atualizar"]]
+            elevation: 2
+
+        MDBoxLayout:
+            orientation: "vertical"
+            padding: dp(16)
+            spacing: dp(10)
+
+            MDCard:
+                orientation: "vertical"
+                size_hint_y: None
+                height: dp(120)
+                padding: dp(14)
+                spacing: dp(10)
+                radius: dp(10)
+                elevation: 1
+
+                MDBoxLayout:
+                    spacing: dp(12)
+                    size_hint_y: None
+                    height: dp(44)
+
+                    BotaoFiltro:
+                        id: botao_categoria
+                        text: "Todos"
+                        on_release: root.escolher_categoria()
+
+                    BotaoFiltro:
+                        id: botao_servico
+                        text: "Todos"
+                        on_release: root.escolher_servico()
+
+                    BotaoFiltro:
+                        id: botao_status
+                        text: "Todos"
+                        on_release: root.escolher_status()
+
+                MDBoxLayout:
+                    spacing: dp(12)
+                    size_hint_y: None
+                    height: dp(44)
+
+                    MDTextField:
+                        id: campo_inicio
+                        hint_text: "Abertura a partir de"
+                        mode: "rectangle"
+                        icon_right: "calendar-start"
+                        on_focus: if self.focus: root.escolher_data("campo_inicio")
+
+                    MDTextField:
+                        id: campo_fim
+                        hint_text: "Abertura até"
+                        mode: "rectangle"
+                        icon_right: "calendar-end"
+                        on_focus: if self.focus: root.escolher_data("campo_fim")
+
+                    BotaoFiltro:
+                        id: botao_ordenacao
+                        text: "Mais recentes"
+                        icon: "sort"
+                        on_release: root.escolher_ordenacao()
+
+            MDBoxLayout:
+                id: area_tabela
+                padding: 0
+
+            MDBoxLayout:
+                size_hint_y: None
+                height: dp(52)
+                spacing: dp(12)
+
+                MDLabel:
+                    id: resumo
+                    text: ""
+                    font_style: "Caption"
+                    theme_text_color: "Hint"
+                    valign: "center"
+
+                MDFlatButton:
+                    text: "REABRIR"
+                    on_release: root.reabrir()
+
+                MDRectangleFlatIconButton:
+                    text: "GERAR PDF"
+                    icon: "file-pdf-box"
+                    on_release: root.gerar_pdf()
+
+                MDRaisedButton:
+                    text: "CONCLUIR OCORRÊNCIA"
+                    icon: "check-circle-outline"
+                    on_release: root.concluir()

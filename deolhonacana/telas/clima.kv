@@ -1,0 +1,133 @@
+#:kivy 2.3.1
+
+<TelaClima>:
+    MDBoxLayout:
+        orientation: "vertical"
+        md_bg_color: app.theme_cls.bg_darkest
+
+        MDTopAppBar:
+            title: "Registrar clima"
+            left_action_items: [["arrow-left", lambda x: root.voltar(), "Voltar"]]
+            elevation: 2
+
+        MDBoxLayout:
+            orientation: "vertical"
+            padding: dp(24)
+            spacing: dp(16)
+
+            MDCard:
+                orientation: "vertical"
+                size_hint_y: None
+                height: dp(320)
+                padding: dp(20)
+                spacing: dp(16)
+                radius: dp(10)
+                elevation: 1
+
+                MDLabel:
+                    text: "Leitura observada"
+                    font_style: "Subtitle1"
+                    bold: True
+                    size_hint_y: None
+                    height: dp(28)
+
+                MDBoxLayout:
+                    spacing: dp(16)
+                    size_hint_y: None
+                    height: dp(48)
+
+                    MDTextField:
+                        id: campo_data
+                        hint_text: "Data"
+                        mode: "rectangle"
+                        icon_right: "calendar"
+                        on_focus: if self.focus: root.escolher_data()
+
+                    MDTextField:
+                        id: campo_hora
+                        hint_text: "Hora (HH:MM)"
+                        mode: "rectangle"
+                        icon_right: "clock-outline"
+                        write_tab: False
+
+                    MDRectangleFlatIconButton:
+                        id: botao_fonte
+                        text: "Selecione a fonte"
+                        icon: "menu-down"
+                        size_hint: 1, None
+                        height: dp(46)
+                        theme_text_color: "Custom"
+                        text_color: app.theme_cls.opposite_bg_dark
+                        line_color: app.theme_cls.divider_color
+                        on_release: root.escolher_fonte()
+
+                MDBoxLayout:
+                    spacing: dp(16)
+                    size_hint_y: None
+                    height: dp(48)
+
+                    MDTextField:
+                        id: campo_temperatura
+                        hint_text: "Temperatura (°C)"
+                        mode: "rectangle"
+                        input_filter: "float"
+                        write_tab: False
+
+                    MDTextField:
+                        id: campo_sensacao
+                        hint_text: "Sensação térmica (°C)"
+                        mode: "rectangle"
+                        input_filter: "float"
+                        write_tab: False
+
+                MDBoxLayout:
+                    spacing: dp(16)
+                    size_hint_y: None
+                    height: dp(48)
+
+                    MDTextField:
+                        id: campo_umidade
+                        hint_text: "Umidade relativa (%)"
+                        mode: "rectangle"
+                        input_filter: "float"
+                        write_tab: False
+
+                    MDTextField:
+                        id: campo_vento
+                        hint_text: "Vento (km/h)"
+                        mode: "rectangle"
+                        input_filter: "float"
+                        write_tab: False
+
+                MDBoxLayout:
+                    spacing: dp(16)
+                    size_hint_y: None
+                    height: dp(48)
+
+                    Widget:
+
+                    MDFlatButton:
+                        text: "VOLTAR"
+                        on_release: root.voltar()
+
+                    MDRaisedButton:
+                        text: "SALVAR LEITURA"
+                        icon: "content-save"
+                        on_release: root.salvar()
+
+            MDLabel:
+                id: ultima_leitura
+                text: ""
+                font_style: "Body2"
+                theme_text_color: "Hint"
+                size_hint_y: None
+                height: dp(40)
+
+            MDLabel:
+                text: "O sistema não consulta a internet: a leitura é anotada a partir da fonte que você consultou."
+                font_style: "Caption"
+                theme_text_color: "Hint"
+                size_hint_y: None
+                height: dp(24)
+
+            Widget:

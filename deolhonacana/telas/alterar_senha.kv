@@ -1,0 +1,82 @@
+#:kivy 2.3.1
+
+<TelaAlterarSenha>:
+    MDBoxLayout:
+        orientation: "vertical"
+        md_bg_color: app.theme_cls.bg_darkest
+
+        Widget:
+
+        MDCard:
+            orientation: "vertical"
+            size_hint: None, None
+            size: dp(420), dp(430)
+            pos_hint: {"center_x": 0.5}
+            padding: dp(28)
+            spacing: dp(14)
+            elevation: 3
+            radius: dp(14)
+
+            MDLabel:
+                text: "Alterar senha"
+                halign: "center"
+                font_style: "H5"
+                bold: True
+                size_hint_y: None
+                height: dp(40)
+
+            MDLabel:
+                id: aviso
+                text: ""
+                halign: "center"
+                font_style: "Body2"
+                theme_text_color: "Hint"
+                size_hint_y: None
+                height: dp(44)
+
+            MDTextField:
+                id: campo_usuario
+                hint_text: "Usuário"
+                icon_right: "account"
+                mode: "rectangle"
+                readonly: True
+
+            MDTextField:
+                id: campo_nova
+                hint_text: "Nova senha"
+                icon_right: "lock"
+                mode: "rectangle"
+                password: True
+                write_tab: False
+                on_text_validate: root.ids.campo_confirmacao.focus = True
+
+            MDTextField:
+                id: campo_confirmacao
+                hint_text: "Confirme a nova senha"
+                icon_right: "lock-check"
+                mode: "rectangle"
+                password: True
+                write_tab: False
+                on_text_validate: root.confirmar()
+
+            MDLabel:
+                id: regra
+                text: ""
+                halign: "center"
+                font_style: "Caption"
+                theme_text_color: "Hint"
+                size_hint_y: None
+                height: dp(30)
+
+            MDRaisedButton:
+                text: "SALVAR SENHA"
+                size_hint_x: 1
+                on_release: root.confirmar()
+
+            MDFlatButton:
+                id: botao_voltar
+                text: "CANCELAR"
+                size_hint_x: 1
+                on_release: root.cancelar()
+
+        Widget:

@@ -1,0 +1,89 @@
+#:kivy 2.3.1
+#:import config deolhonacana.config
+
+<TelaLogin>:
+    MDBoxLayout:
+        orientation: "vertical"
+        md_bg_color: app.theme_cls.bg_darkest
+
+        Widget:
+
+        MDCard:
+            orientation: "vertical"
+            size_hint: None, None
+            size: dp(400), dp(470)
+            pos_hint: {"center_x": 0.5}
+            padding: dp(28)
+            spacing: dp(14)
+            elevation: 3
+            radius: dp(14)
+
+            MDBoxLayout:
+                size_hint_y: None
+                height: dp(96)
+
+                Image:
+                    source: config.caminho_imagem("marca.png")
+                    size_hint: None, None
+                    size: dp(96), dp(96)
+                    pos_hint: {"center_x": 0.5}
+                    allow_stretch: True
+                    keep_ratio: True
+
+            MDLabel:
+                text: config.APP_NOME
+                halign: "center"
+                font_style: "H5"
+                bold: True
+                size_hint_y: None
+                height: dp(38)
+
+            MDLabel:
+                text: config.ORGANIZACAO
+                halign: "center"
+                font_style: "Caption"
+                theme_text_color: "Hint"
+                size_hint_y: None
+                height: dp(20)
+
+            Widget:
+                size_hint_y: None
+                height: dp(6)
+
+            MDTextField:
+                id: campo_usuario
+                hint_text: "Usuário"
+                icon_right: "account"
+                mode: "rectangle"
+                write_tab: False
+                on_text_validate: root.ids.campo_senha.focus = True
+
+            MDTextField:
+                id: campo_senha
+                hint_text: "Senha"
+                icon_right: "lock"
+                mode: "rectangle"
+                password: True
+                write_tab: False
+                on_text_validate: root.entrar()
+
+            MDRaisedButton:
+                text: "ENTRAR"
+                size_hint_x: 1
+                on_release: root.entrar()
+
+            MDFlatButton:
+                text: "Sair do programa"
+                size_hint_x: 1
+                on_release: app.encerrar()
+
+            MDLabel:
+                id: rodape
+                text: ""
+                halign: "center"
+                font_style: "Caption"
+                theme_text_color: "Hint"
+                size_hint_y: None
+                height: dp(18)
+
+        Widget:

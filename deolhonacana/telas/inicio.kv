@@ -1,0 +1,157 @@
+#:kivy 2.3.1
+#:import config deolhonacana.config
+
+# Cartão de número do topo: rótulo pequeno em cima, valor grande embaixo.
+# O valor é uma propriedade do próprio cartão, escrita pela tela em Python.
+<CartaoIndicador@MDCard>:
+    titulo: ""
+    valor: "0"
+    cor_destaque: app.theme_cls.primary_color
+    orientation: "vertical"
+    padding: dp(16)
+    spacing: dp(2)
+    radius: dp(10)
+    elevation: 2
+    size_hint_y: None
+    height: dp(96)
+
+    MDLabel:
+        text: root.titulo
+        font_style: "Overline"
+        theme_text_color: "Hint"
+        size_hint_y: None
+        height: dp(20)
+
+    MDLabel:
+        text: root.valor
+        font_style: "H4"
+        bold: True
+        theme_text_color: "Custom"
+        text_color: root.cor_destaque
+
+# Botão grande do menu, com ícone à esquerda.
+<BotaoMenu@MDRectangleFlatIconButton>:
+    size_hint: 1, None
+    height: dp(64)
+    font_size: "16sp"
+    icon_size: "26sp"
+    theme_text_color: "Custom"
+    text_color: app.theme_cls.opposite_bg_dark
+    theme_icon_color: "Custom"
+    line_color: app.theme_cls.divider_color
+
+<TelaInicio>:
+    MDBoxLayout:
+        orientation: "vertical"
+        md_bg_color: app.theme_cls.bg_darkest
+
+        MDTopAppBar:
+            title: config.APP_NOME
+            right_action_items: [["key-variant", lambda x: root.trocar_senha(), "Trocar senha"], ["logout", lambda x: app.sair_da_conta(), "Sair da conta"]]
+            elevation: 2
+
+        MDBoxLayout:
+            orientation: "vertical"
+            padding: dp(24)
+            spacing: dp(16)
+
+            MDLabel:
+                id: saudacao
+                text: "Bem-vindo"
+                font_style: "H5"
+                bold: True
+                size_hint_y: None
+                height: dp(40)
+
+            MDBoxLayout:
+                size_hint_y: None
+                height: dp(96)
+                spacing: dp(16)
+
+                CartaoIndicador:
+                    id: cartao_pendentes
+                    titulo: "Ocorrências pendentes"
+                    cor_destaque: 0.91, 0.51, 0.23, 1
+
+                CartaoIndicador:
+                    id: cartao_finalizadas
+                    titulo: "Ocorrências finalizadas"
+                    cor_destaque: 0.30, 0.62, 0.44, 1
+
+                CartaoIndicador:
+                    id: cartao_mais_antiga
+                    titulo: "Pendência mais antiga"
+                    valor: "0 dias"
+
+            MDGridLayout:
+                cols: 3
+                spacing: dp(16)
+                padding: 0, dp(8), 0, 0
+                size_hint_y: None
+                height: self.minimum_height
+
+                BotaoMenu:
+                    text: "Lançar ocorrência"
+                    icon: "clipboard-plus-outline"
+                    icon_color: 0.30, 0.62, 0.44, 1
+                    on_release: app.ir_para("lancamento")
+
+                BotaoMenu:
+                    text: "Ocorrências pendentes"
+                    icon: "clipboard-alert-outline"
+                    icon_color: 0.91, 0.51, 0.23, 1
+                    on_release: root.abrir_pendentes()
+
+                BotaoMenu:
+                    text: "Consultar e concluir"
+                    icon: "database-search-outline"
+                    icon_color: 0.36, 0.56, 0.94, 1
+                    on_release: root.abrir_consulta()
+
+                BotaoMenu:
+                    text: "Registrar queima"
+                    icon: "fire-alert"
+                    icon_color: 0.83, 0.27, 0.20, 1
+                    on_release: app.ir_para("queima")
+
+                BotaoMenu:
+                    text: "Registrar clima"
+                    icon: "weather-partly-rainy"
+                    icon_color: 0.42, 0.70, 0.88, 1
+                    on_release: app.ir_para("clima")
+
+                BotaoMenu:
+                    text: "Indicadores"
+                    icon: "chart-box-outline"
+                    icon_color: 0.95, 0.76, 0.25, 1
+                    on_release: app.ir_para("indicadores")
+
+                BotaoMenu:
+                    id: botao_usuarios
+                    text: "Usuários"
+                    icon: "account-multiple-outline"
+                    icon_color: 0.65, 0.55, 0.85, 1
+                    on_release: app.ir_para("usuarios")
+
+                BotaoMenu:
+                    text: "Trocar senha"
+                    icon: "key-variant"
+                    icon_color: 0.70, 0.70, 0.70, 1
+                    on_release: root.trocar_senha()
+
+                BotaoMenu:
+                    text: "Fechar programa"
+                    icon: "power"
+                    icon_color: 0.60, 0.60, 0.60, 1
+                    on_release: app.encerrar()
+
+            Widget:
+
+            MDLabel:
+                id: rodape_dados
+                text: ""
+                font_style: "Caption"
+                theme_text_color: "Hint"
+                halign: "right"
+                size_hint_y: None
+                height: dp(20)

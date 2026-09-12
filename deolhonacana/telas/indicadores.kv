@@ -1,0 +1,44 @@
+#:kivy 2.3.1
+
+<TelaIndicadores>:
+    MDBoxLayout:
+        orientation: "vertical"
+        md_bg_color: app.theme_cls.bg_darkest
+
+        MDTopAppBar:
+            title: "Indicadores"
+            left_action_items: [["arrow-left", lambda x: root.voltar(), "Voltar"]]
+            right_action_items: [["refresh", lambda x: root.atualizar(), "Atualizar"], ["open-in-new", lambda x: root.abrir_imagem(), "Abrir imagem"]]
+            elevation: 2
+
+        MDBoxLayout:
+            orientation: "vertical"
+            padding: dp(16)
+            spacing: dp(10)
+
+            MDLabel:
+                id: resumo
+                text: ""
+                font_style: "Body2"
+                theme_text_color: "Hint"
+                size_hint_y: None
+                height: dp(28)
+
+            MDCard:
+                radius: dp(10)
+                elevation: 1
+                padding: dp(8)
+
+                Image:
+                    id: painel
+                    source: ""
+                    allow_stretch: True
+                    keep_ratio: True
+
+            MDLabel:
+                text: "Gráficos calculados no próprio computador, a partir do banco local."
+                font_style: "Caption"
+                theme_text_color: "Hint"
+                halign: "right"
+                size_hint_y: None
+                height: dp(20)
