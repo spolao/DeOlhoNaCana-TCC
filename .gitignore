@@ -1,0 +1,39 @@
+# Ambiente virtual
+.venv/
+venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Dados locais do aplicativo em modo portatil (nunca versionar).
+# A barra inicial ancora na raiz: sem ela, a regra tambem casaria
+# com o pacote deolhonacana/dados.
+/dados/
+*.db
+*.db-journal
+*.db-wal
+
+# Recursos gerados por ferramentas/gerar_recursos.py
+deolhonacana/recursos/imagens/*.png
+deolhonacana/recursos/imagens/*.ico
+
+# Saídas de build
+build/
+dist/
+
+# Editores e sistema operacional
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Saídas dos roteiros de verificação manual
+.capturas/
+.teste_dados/
+.teste_ui_dados/
+_roteiro_ui.py
